@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <nav class="navbar navbar-dark bg-danger">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">MEVN stack</a>
