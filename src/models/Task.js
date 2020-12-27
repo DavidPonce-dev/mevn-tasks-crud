@@ -3,7 +3,7 @@ const { Schema } = mongoose
 
 const Task = new Schema({
     title: String,  
-    desctiption: String
+    description: String
 })
 
 module.exports = mongoose.model('Task', Task)

@@ -19,7 +19,7 @@ router.put('/:id', async (req, res) => {
         status: 'Tarea actualizada'
     })
 })
-router.delete('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const tasks = await Task.findByIdAndRemove(req.params.id)
     res.json({
         status: 'Tarea eliminada'
