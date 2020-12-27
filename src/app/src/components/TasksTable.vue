@@ -11,6 +11,11 @@
         <td>{{ task.title }}</td>
         <td>{{ task.description }}</td>
         <td>
+          <button class="btn btn-info" @click="editTask(task._id)">
+            Edit
+          </button>
+        </td>
+        <td>
           <button class="btn btn-danger" @click="deleteTask(task._id)">
             Eliminar
           </button>
@@ -43,6 +48,9 @@ export default {
         this.getTasks();
       });
     },
+    editTask(_id){
+      console.log(_id)
+    }
   },
 };
 </script>
