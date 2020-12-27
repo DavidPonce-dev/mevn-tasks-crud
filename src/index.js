@@ -17,7 +17,7 @@ app.use(express.json())
 //routes
 const tasks = require('./routes/tasks')
 
-app.use('/tasks', tasks)
+app.use('/api/tasks', tasks)
 
 //static files
 app.use(express.static(__dirname + '\\public'))
