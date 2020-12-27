@@ -1,7 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 
 const app = express()
+mongoose.connect('mongodb://localhost/mevn-crud-db')
+  .then(db => console.log('db connectada'))
+  .catch(err => console.log(err))
 
 //settings
 app.set('port', process.env.PORT || 3000)
