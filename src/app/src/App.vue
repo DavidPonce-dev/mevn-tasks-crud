@@ -24,7 +24,7 @@ import TasksTable from './components/TasksTable.vue'
 export default {
   components: {
     AddTaskForm,
-    TaskTable
+    TasksTable
   }
 }
 </script>
