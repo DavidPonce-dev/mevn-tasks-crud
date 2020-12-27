@@ -57,12 +57,12 @@
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>
-                  <button class="btn btn-info mx-auto" @click="editTask(task._id)">
+                  <button class="btn btn-info w-100" @click="editTask(task._id)">
                     Edit
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-danger mx-auto" @click="deleteTask(task._id)">
+                  <button class="btn btn-danger w-100" @click="deleteTask(task._id)">
                     Eliminar
                   </button>
                 </td>
