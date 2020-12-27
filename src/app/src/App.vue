@@ -10,6 +10,9 @@
         <div class="col-md-5">
           <AddTaskForm />
         </div>
+        <div class="col-md-7">
+          <TasksTable />
+        </div>
       </div>
     </div>
   </div>
@@ -17,9 +20,11 @@
 
 <script>
 import AddTaskForm from './components/AddTaskForm.vue'
+import TasksTable from './components/TasksTable.vue'
 export default {
   components: {
-    AddTaskForm
+    AddTaskForm,
+    TaskTable
   }
 }
 </script>
