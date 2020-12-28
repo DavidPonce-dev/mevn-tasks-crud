@@ -1,16 +1,14 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './views/Home'
 
-const routes = [
-  {
-    path: '/',
-    component: Home
-  }
-]
+import TaskApp from './views/TaskApp.vue'
 
-VueRouter({
-  mode: 'history',
-  routes
+Vue.use(VueRouter)
+
+export default new VueRouter({
+  mode:'history',
+  routes: [{
+    path:'/',
+    component:TaskApp
+  }]
 })
-
-export default router

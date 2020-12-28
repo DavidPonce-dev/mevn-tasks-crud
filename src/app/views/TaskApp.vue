@@ -1,10 +1,5 @@
 <template>
   <div>
-    <nav class="navbar navbar-dark bg-danger">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">MEVN stack</a>
-      </div>
-    </nav>
     <div class="container">
       <div class="row">
         <div class="col-md-5">
@@ -90,7 +85,7 @@
 </template>
 
 <script>
-import Task from './schema/Task'
+import Task from './TaskApp/Task'
 export default {
   data() {
     return {
