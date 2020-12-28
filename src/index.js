@@ -4,7 +4,7 @@ const reload = require('reload')
 const mongoose = require('mongoose')
 
 const app = express()
-mongoose.connect('mongodb://localhost/mevn-crud-db')
+mongoose.connect('mongodb+srv://admin:admin@bbycluster.d1u96.mongodb.net/mevn-crud-db')
   .then(db => console.log('db connectada'))
   .catch(err => console.log(err))
 
