@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const reload = require('reload')
 const mongoose = require('mongoose')
 
 const app = express()
@@ -22,7 +23,14 @@ app.use('/api/tasks', tasks)
 //static files
 app.use(express.static(__dirname + '\\public'))
 
-//listen
+
+// Reload 
+reload(app).then(function (reloadReturned) {
+
+  //listen
 app.listen(app.get('port'), () =>{
-    console.log('server listen on port ' + app.get('port'))
+  console.log('server listen on port ' + app.get('port'))
+})
+}).catch(function (err) {
+  console.error('Reload could not start, could not start server/sample app', err)
 })
