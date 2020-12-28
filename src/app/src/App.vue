@@ -10,7 +10,7 @@
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
-              <form @submit.prevent="addTask">
+              <form @submit.prevent="submitTask">
                 <div class="form-group">
                   <input
                     type="text"
@@ -32,13 +32,21 @@
                   <button
                     type="submit"
                     class="btn btn-success w-100"
-                    v-if="!edit"
-                    >Enviar</button>
-                  <button
-                    type="submit"
-                    class="btn btn-info w-100"
-                    v-else
-                  >Actualizar</button>
+                    v-if="edit == ''"
+                  >
+                    Enviar
+                  </button>
+                  <div class="row w-100 m-0" v-else>
+                    <button type="submit" class="btn btn-info col-10">
+                      Actualizar
+                    </button>
+                    <button
+                      class="btn btn-danger col-2"
+                      @click="cleanData"
+                    >
+                      X
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -57,12 +65,18 @@
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>
-                  <button class="btn btn-info w-100" @click="editTask(task._id)">
+                  <button
+                    class="btn btn-info w-100"
+                    @click="editTask(task)"
+                  >
                     Edit
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-danger w-100" @click="deleteTask(task._id)">
+                  <button
+                    class="btn btn-danger w-100"
+                    @click="deleteTask(task._id)"
+                  >
                     Eliminar
                   </button>
                 </td>
@@ -76,39 +90,52 @@
 </template>
 
 <script>
+import Task from './schema/Task'
 export default {
   data() {
     return {
-      task: {
-        title: "",
-        description: "",
-      },
       tasks: [],
-      edit: false,
+      task: new Task(),
+      edit: "",
     };
   },
   created() {
     this.getTasks();
   },
   methods: {
-    addTask() {
-      fetch("/api/tasks", {
-        method: "POST",
-        body: JSON.stringify(this.task),
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          this.task.title = "";
-          this.task.description = "";
-
-          this.getTasks()
-
-          console.log(data);
+    condSubmit() {
+      if (this.edit != "") {
+        return fetch("/api/tasks/" + this.edit, {
+          method: "PUT",
+          body: JSON.stringify(this.task),
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
         });
+      } else {
+        return fetch("/api/tasks", {
+          method: "POST",
+          body: JSON.stringify(this.task),
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        });
+      }
+    },
+    cleanData(){
+      this.edit = "";
+      this.task = new Task();
+    },
+    submitTask() {
+      this.condSubmit()
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        this.cleanData();
+        this.getTasks();
+      });
     },
     getTasks() {
       fetch("api/tasks")
@@ -118,12 +145,16 @@ export default {
     deleteTask(_id) {
       fetch("api/tasks/" + _id, {
         method: "DELETE",
-      }).then(() => {
+      })
+      .then(res => res.json())
+      .then((data) => {
+        console.log(data)
         this.getTasks();
       });
     },
-    editTask(_id) {
-      console.log(_id);
+    editTask(task) {
+      this.task = new Task(task.title, task.description);
+      this.edit = task._id;
     },
   },
 };
